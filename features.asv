@@ -1,0 +1,14 @@
+function f = features(x)
+x = filtrar(x);
+winsize = 2^9;
+wininc = 2^4;
+J = 4;%% 16 folhas no nivel mais baixo da arvore
+toolbox = 'matlab';
+f = getmswpfeat(x,winsize,wininc,J,toolbox);
+f = f(:,1:16);
+[l,c] = size(f);
+fa = f(1:round(l/3),:);
+fb = f(round(l/3)+1:round(2*l/3),:);
+fc = f(round(2*l/3)+1:end,:);
+f = [fb; median(fc)];
+a=1;
